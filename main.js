@@ -27,20 +27,20 @@ $(function() {
         mousePressed = true
     });
     canvas.on('mouse:move', function(e) {
-        recordCoor(e)
+        recordCoordinates(e)
     });
 });
 
 /*
 set the table of the predictions 
 */
-function setTable(top5, probs) {
+function setTable(top5, probability) {
     //loop over the predictions 
     for (var i = 0; i < top5.length; i++) {
         let sym = document.getElementById('sym' + (i + 1));
         let prob = document.getElementById('prob' + (i + 1));
         sym.innerHTML = top5[i];
-        prob.innerHTML = Math.round(probs[i] * 100);
+        prob.innerHTML = Math.round(probability[i] * 100);
     }
     //create the pie 
     createPie(".pieID.legend", ".pieID.pie");
@@ -50,7 +50,7 @@ function setTable(top5, probs) {
 /*
 record the current drawing coordinates
 */
-function recordCoor(event) {
+function recordCoordinates(event) {
     var pointer = canvas.getPointer(event.e);
     var posX = pointer.x;
     var posY = pointer.y;
@@ -65,21 +65,21 @@ get the best bounding box by trimming around the drawing
 */
 function getMinBox() {
     //get coordinates 
-    var coorX = coords.map(function(p) {
+    var coordinateX = coords.map(function(p) {
         return p.x
     });
-    var coorY = coords.map(function(p) {
+    var coordinateY = coords.map(function(p) {
         return p.y
     });
 
     //find top left and bottom right corners 
     var min_coords = {
-        x: Math.min.apply(null, coorX),
-        y: Math.min.apply(null, coorY)
+        x: Math.min.apply(null, coordinateX),
+        y: Math.min.apply(null, coordinateY)
     };
     var max_coords = {
-        x: Math.max.apply(null, coorX),
-        y: Math.max.apply(null, coorY)
+        x: Math.max.apply(null, coordinateX),
+        y: Math.max.apply(null, coordinateY)
     };
 
     return {
@@ -97,9 +97,8 @@ function getImageData() {
 
         //get image data according to dpi 
         const dpi = window.devicePixelRatio
-        const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
-                                                      (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
-        return imgData
+        return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
+            (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
     }
 
 /*
@@ -117,11 +116,11 @@ function getFrame() {
 
         //find the top 5 predictions 
         const indices = findIndicesOfMax(pred, 5);
-        const probs = findTopValues(pred, 5);
+        const probability = findTopValues(pred, 5);
         const names = getClassNames(indices);
 
         //set the table 
-        setTable(names, probs)
+        setTable(names, probability)
     }
 
 }
@@ -130,10 +129,10 @@ function getFrame() {
 get the the class names 
 */
 function getClassNames(indices) {
-    var outp = [];
+    var output = [];
     for (var i = 0; i < indices.length; i++)
-        outp[i] = classNames[indices[i]];
-    return outp
+        output[i] = classNames[indices[i]];
+    return output
 }
 
 /*
@@ -141,10 +140,8 @@ load the class names
 */
 async function loadDict() {
 
-    loc = 'model/class_names.txt';
-    
     await $.ajax({
-        url: loc,
+        url: 'model/class_names.txt',
         dataType: 'text',
     }).done(success);
 }
@@ -155,8 +152,7 @@ load the class names
 function success(data) {
     const lst = data.split(/\n/);
     for (var i = 0; i < lst.length - 1; i++) {
-        let symbol = lst[i];
-        classNames[i] = symbol
+        classNames[i] = lst[i]
     }
 }
 
@@ -164,29 +160,29 @@ function success(data) {
 get indices of the top probabilities
 */
 function findIndicesOfMax(inp, count) {
-    var outp = [];
+    var output = [];
     for (var i = 0; i < inp.length; i++) {
-        outp.push(i); // add index to output array
-        if (outp.length > count) {
-            outp.sort(function(a, b) {
+        output.push(i); // add index to output array
+        if (output.length > count) {
+            output.sort(function(a, b) {
                 return inp[b] - inp[a];
             }); // descending sort the output array
-            outp.pop(); // remove the last index (index of smallest element in output array)
+            output.pop(); // remove the last index (index of smallest element in output array)
         }
     }
-    return outp;
+    return output;
 }
 
 /*
 find the top 5 predictions
 */
 function findTopValues(inp, count) {
-    var outp = [];
+    var output = [];
     let indices = findIndicesOfMax(inp, count);
     // show 5 greatest scores
     for (var i = 0; i < indices.length; i++)
-        outp[i] = inp[indices[i]];
-    return outp
+        output[i] = inp[indices[i]];
+    return output
 }
 
 /*
@@ -198,15 +194,15 @@ function preprocess(imgData) {
         let tensor = tf.browser.fromPixels(imgData, numChannels = 1);
         
         //resize 
-        const resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat();
+        const resize = tf.image.resizeBilinear(tensor, [28, 28]).toFloat();
         
         //normalize 
         const offset = tf.scalar(255.0);
-        const normalized = tf.scalar(1.0).sub(resized.div(offset));
+        const normalized = tf.scalar(1.0).sub(resize.div(offset));
 
         //We add a dimension to get a batch shape 
-        const batched = normalized.expandDims(0);
-        return batched
+
+        return normalized.expandDims(0)
     })
 }
 
