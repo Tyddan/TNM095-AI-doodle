@@ -3,7 +3,7 @@ function sliceSize(dataNum, dataTotal) {
 }
 function addSlice(sliceSize, pieElement, offset, sliceID, color) {
   $(pieElement).append("<div class='slice "+sliceID+"'><span></span></div>");
-  var offset = offset - 1;
+  offset = offset - 1;
   var sizeRotation = -179 + sliceSize;
   $("."+sliceID).css({
     "transform": "rotate("+offset+"deg) translate3d(0,0,0)"
