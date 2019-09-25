@@ -215,9 +215,8 @@ function preprocess(imgData) {
 /*
 load the model
 */
-async function start(cur_mode) {
-    //arabic or english
-    mode = cur_mode
+async function start() {
+    
     
     //load the model 
     model = await tf.loadLayersModel('model/model.json')
