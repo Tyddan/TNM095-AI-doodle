@@ -1,12 +1,12 @@
 /*
 variables
 */
-let model;
-let classNames = [];
-let canvas;
-let coords = [];
-let mousePressed = false;
-let mode;
+var model;
+var classNames = [];
+var canvas;
+var coords = [];
+var mousePressed = false;
+var mode;
 
 /*
 prepare the drawing canvas 
@@ -36,7 +36,7 @@ set the table of the predictions
 */
 function setTable(top5, probability) {
     //loop over the predictions 
-    for (let i = 0; i < top5.length; i++) {
+    for (var i = 0; i < top5.length; i++) {
         let sym = document.getElementById('sym' + (i + 1));
         let prob = document.getElementById('prob' + (i + 1));
         sym.innerHTML = top5[i];
@@ -51,9 +51,9 @@ function setTable(top5, probability) {
 record the current drawing coordinates
 */
 function recordCoordinates(event) {
-    let pointer = canvas.getPointer(event.e);
-    let posX = pointer.x;
-    let posY = pointer.y;
+    var pointer = canvas.getPointer(event.e);
+    var posX = pointer.x;
+    var posY = pointer.y;
 
     if (posX >= 0 && posY >= 0 && mousePressed) {
         coords.push(pointer)
@@ -65,19 +65,19 @@ get the best bounding box by trimming around the drawing
 */
 function getMinBox() {
     //get coordinates 
-    let coordinateX = coords.map(function(p) {
+    var coordinateX = coords.map(function(p) {
         return p.x
     });
-    let coordinateY = coords.map(function(p) {
+    var coordinateY = coords.map(function(p) {
         return p.y
     });
 
     //find top left and bottom right corners 
-    let min_coords = {
+    var min_coords = {
         x: Math.min.apply(null, coordinateX),
         y: Math.min.apply(null, coordinateY)
     };
-    let max_coords = {
+    var max_coords = {
         x: Math.max.apply(null, coordinateX),
         y: Math.max.apply(null, coordinateY)
     };
@@ -96,7 +96,7 @@ function getImageData() {
         const mbb = getMinBox();
 
         //get image data according to dpi 
-        const dpi = window.devicePixelRatio;
+        const dpi = window.devicePixelRatio
         return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
             (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
     }
@@ -129,8 +129,8 @@ function getFrame() {
 get the the class names 
 */
 function getClassNames(indices) {
-    let output = [];
-    for (let i = 0; i < indices.length; i++)
+    var output = [];
+    for (var i = 0; i < indices.length; i++)
         output[i] = classNames[indices[i]];
     return output
 }
@@ -151,7 +151,7 @@ load the class names
 */
 function success(data) {
     const lst = data.split(/\n/);
-    for (let i = 0; i < lst.length - 1; i++) {
+    for (var i = 0; i < lst.length - 1; i++) {
         classNames[i] = lst[i]
     }
 }
@@ -160,8 +160,8 @@ function success(data) {
 get indices of the top probabilities
 */
 function findIndicesOfMax(inp, count) {
-    let output = [];
-    for (let i = 0; i < inp.length; i++) {
+    var output = [];
+    for (var i = 0; i < inp.length; i++) {
         output.push(i); // add index to output array
         if (output.length > count) {
             output.sort(function(a, b) {
@@ -177,10 +177,10 @@ function findIndicesOfMax(inp, count) {
 find the top 5 predictions
 */
 function findTopValues(inp, count) {
-    let output = [];
+    var output = [];
     let indices = findIndicesOfMax(inp, count);
     // show 5 greatest scores
-    for (let i = 0; i < indices.length; i++)
+    for (var i = 0; i < indices.length; i++)
         output[i] = inp[indices[i]];
     return output
 }
@@ -234,7 +234,7 @@ function allowDrawing() {
     document.getElementById('status').innerHTML = 'Model Loaded';
 
     $('button').prop('disabled', false);
-    let slider = document.getElementById('myRange');
+    var slider = document.getElementById('myRange');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
     };
