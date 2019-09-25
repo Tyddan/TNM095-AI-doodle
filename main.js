@@ -40,11 +40,11 @@ function setTable(top5, probability) {
         let sym = document.getElementById('sym' + (i + 1));
         let prob = document.getElementById('prob' + (i + 1));
         sym.innerHTML = top5[i];
-        let number = Math.round(probability[i] * 100);
-        prob.innerHTML = number.toString();
+        prob.innerHTML = Math.round(probability[i] * 100);
     }
     //create the pie 
     createPie(".pieID.legend", ".pieID.pie");
+
 }
 
 /*
