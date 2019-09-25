@@ -19,16 +19,16 @@ $(function() {
     canvas.freeDrawingBrush.width = 10;
     canvas.renderAll();
     //setup listeners
-    canvas.on('mouse:up', function(e) {
-        //getFrame();
+    canvas.onmouseup = function(e) {
+        getFrame();
         mousePressed = false;
-    });
-    canvas.on('mouse:down', function(e) {
+    };
+    canvas.onmousedown = function(e) {
         mousePressed = true;
-    });
-    canvas.on('mouse:move', function(e) {
+    };
+    canvas.onmousemove = function(e) {
         recordCoordinates(e)
-    });
+    };
 });
 
 /*
