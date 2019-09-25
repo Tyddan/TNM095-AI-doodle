@@ -1,12 +1,12 @@
 /*
 variables
 */
-var model;
-var classNames = [];
-var canvas;
-var coords = [];
-var mousePressed = false;
-var mode;
+let model;
+const classNames = [];
+let canvas;
+let coords = [];
+let mousePressed = false;
+let mode;
 
 /*
 prepare the drawing canvas 
@@ -36,7 +36,7 @@ set the table of the predictions
 */
 function setTable(top5, probability) {
     //loop over the predictions 
-    for (var i = 0; i < top5.length; i++) {
+    for (let i = 0; i < top5.length; i++) {
         let sym = document.getElementById('sym' + (i + 1));
         let prob = document.getElementById('prob' + (i + 1));
         sym.innerHTML = top5[i];
@@ -51,9 +51,9 @@ function setTable(top5, probability) {
 record the current drawing coordinates
 */
 function recordCoordinates(event) {
-    var pointer = canvas.getPointer(event.e);
-    var posX = pointer.x;
-    var posY = pointer.y;
+    const pointer = canvas.getPointer(event.e);
+    const posX = pointer.x;
+    const posY = pointer.y;
 
     if (posX >= 0 && posY >= 0 && mousePressed) {
         coords.push(pointer)
@@ -65,19 +65,19 @@ get the best bounding box by trimming around the drawing
 */
 function getMinBox() {
     //get coordinates 
-    var coordinateX = coords.map(function(p) {
+    const coordinateX = coords.map(function (p) {
         return p.x
     });
-    var coordinateY = coords.map(function(p) {
+    const coordinateY = coords.map(function (p) {
         return p.y
     });
 
     //find top left and bottom right corners 
-    var min_coords = {
+    const min_coords = {
         x: Math.min.apply(null, coordinateX),
         y: Math.min.apply(null, coordinateY)
     };
-    var max_coords = {
+    const max_coords = {
         x: Math.max.apply(null, coordinateX),
         y: Math.max.apply(null, coordinateY)
     };
@@ -129,8 +129,8 @@ function getFrame() {
 get the the class names 
 */
 function getClassNames(indices) {
-    var output = [];
-    for (var i = 0; i < indices.length; i++)
+    let output = [];
+    for (let i = 0; i < indices.length; i++)
         output[i] = classNames[indices[i]];
     return output
 }
@@ -151,7 +151,7 @@ load the class names
 */
 function success(data) {
     const lst = data.split(/\n/);
-    for (var i = 0; i < lst.length - 1; i++) {
+    for (let i = 0; i < lst.length - 1; i++) {
         classNames[i] = lst[i]
     }
 }
@@ -160,8 +160,8 @@ function success(data) {
 get indices of the top probabilities
 */
 function findIndicesOfMax(inp, count) {
-    var out = [];
-    for (var i = 0; i < inp.length; i++) {
+    let out = [];
+    for (let i = 0; i < inp.length; i++) {
         out.push(i); // add index to output array
         if (out.length > count) {
             out.sort(function(a, b) {
@@ -177,10 +177,10 @@ function findIndicesOfMax(inp, count) {
 find the top 5 predictions
 */
 function findTopValues(inp, count) {
-    var out = [];
+    let out = [];
     let indices = findIndicesOfMax(inp, count);
     // show 5 greatest scores
-    for (var i = 0; i < indices.length; i++)
+    for (let i = 0; i < indices.length; i++)
         out[i] = inp[indices[i]];
     return out
 }
@@ -194,14 +194,13 @@ function preprocess(imgData) {
         let tensor = tf.browser.fromPixels(imgData, numChannels = 1);
         
         //resize 
-        const resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat();
+        const resize = tf.image.resizeBilinear(tensor, [28, 28]).toFloat();
         
         //normalize 
         const offset = tf.scalar(255.0);
-        const normalized = tf.scalar(1.0).sub(resized.div(offset));
+        const normalized = tf.scalar(1.0).sub(resize.div(offset));
 
-        //We add a dimension to get a batch shape 
-
+        //We add a dimension to get a batch shape
         return normalized.expandDims(0)
     })
 }
@@ -234,7 +233,7 @@ function allowDrawing() {
     document.getElementById('status').innerHTML = 'Model Loaded';
 
     $('button').prop('disabled', false);
-    var slider = document.getElementById('myRange');
+    const slider = document.getElementById('myRange');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
     };
