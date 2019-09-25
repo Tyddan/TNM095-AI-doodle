@@ -174,10 +174,11 @@ function findIndicesOfMax(inp, count) {
 find the top 5 predictions
 */
 function findTopValues(inp, count) {
-    let output;
+    let output = [];
     let indices = findIndicesOfMax(inp, count);
     // show 5 greatest scores
-        output = inp[indices];
+    for (let i = 0; i < indices.length; i++)
+        output[i] = inp[indices[i]];
     return output
 }
 
