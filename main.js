@@ -12,7 +12,7 @@ let mode;
 prepare the drawing canvas
 */
 $(function() {
-    canvas = window.canvas = new fabric.canvas('canvas');
+    canvas = window.canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 0;
     canvas.freeDrawingBrush.color = "black";
