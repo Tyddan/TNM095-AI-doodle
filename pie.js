@@ -27,7 +27,7 @@ function createPie(dataElement, pieElement) {
   let i;
   const listData = [];
   $(dataElement+" span").each(function() {
-    listData.push(Number($(this).htmlFor()));
+    listData.push(Number($(this).html()));
   });
   let listTotal = 0;
   for(i = 0; i<listData.length; i++) {
