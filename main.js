@@ -20,7 +20,7 @@ $(function() {
     canvas.renderAll();
     //setup listeners
     canvas.on('mouse:up', function(e) {
-        getFrame();
+        //getFrame();
         mousePressed = false;
     });
     canvas.on('mouse:down', function(e) {
