@@ -44,7 +44,6 @@ function setTable(top5, probability) {
     }
     //create the pie 
     createPie(".pieID.legend", ".pieID.pie");
-
 }
 
 /*
@@ -99,7 +98,7 @@ function getImageData() {
         const dpi = window.devicePixelRatio;
         return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
             (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
-    }
+}
 
 /*
 get the prediction 
@@ -122,7 +121,6 @@ function getFrame() {
         //set the table 
         setTable(names, probability)
     }
-
 }
 
 /*
@@ -210,8 +208,7 @@ function preprocess(imgData) {
 load the model
 */
 async function start() {
-    
-    
+
     //load the model 
     model = await tf.loadLayersModel('model/model.json');
     
