@@ -96,7 +96,7 @@ function getImageData() {
         const mbb = getMinBox();
 
         //get image data according to dpi 
-        const dpi = window.devicePixelRatio
+        const dpi = window.devicePixelRatio;
         return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
             (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
     }
@@ -122,7 +122,6 @@ function getFrame() {
         //set the table 
         setTable(names, probability)
     }
-
 }
 
 /*
