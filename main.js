@@ -36,9 +36,10 @@ set the table of the predictions
 */
 function setTable(topGuess, probability) {
     //loop over the predictions 
-        let sym = document.getElementById('sym' + (topGuess));
-        let prob = document.getElementById('prob' + (topGuess));
-        sym.innerHTML = topGuess;
+    for (let i = 0; i < topGuess.length; i++) {
+        let sym = document.getElementById('sym' + (i + 1));
+        let prob = document.getElementById('prob' + (i + 1));
+        sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
     }
     //create the pie 
