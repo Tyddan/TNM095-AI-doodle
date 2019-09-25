@@ -126,10 +126,7 @@ function getFrame() {
 get the the class names 
 */
 function getClassNames(indices) {
-    let output = [];
-    for (let i = 0; i < indices.length; i++)
-        output[i] = classNames[indices[i]];
-    return output
+    return classNames[indices]
 }
 
 /*
