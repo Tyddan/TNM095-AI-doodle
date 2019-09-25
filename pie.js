@@ -3,8 +3,8 @@ function sliceSize(dataNum, dataTotal) {
 }
 function addSlice(sliceSize, pieElement, offset, sliceID, color) {
   $(pieElement).append("<div class='slice "+sliceID+"'><span></span></div>");
-  var offset = offset - 1;
-  var sizeRotation = -179 + sliceSize;
+  offset = offset - 1;
+  const sizeRotation = -179 + sliceSize;
   $("."+sliceID).css({
     "transform": "rotate("+offset+"deg) translate3d(0,0,0)"
   });
@@ -14,8 +14,8 @@ function addSlice(sliceSize, pieElement, offset, sliceID, color) {
   });
 }
 function iterateSlices(sliceSize, pieElement, offset, dataCount, sliceCount, color) {
-  var sliceID = "s"+dataCount+"-"+sliceCount;
-  var maxSize = 179;
+  const sliceID = "s" + dataCount + "-" + sliceCount;
+  const maxSize = 179;
   if(sliceSize<=maxSize) {
     addSlice(sliceSize, pieElement, offset, sliceID, color);
   } else {
@@ -24,16 +24,17 @@ function iterateSlices(sliceSize, pieElement, offset, dataCount, sliceCount, col
   }
 }
 function createPie(dataElement, pieElement) {
-  var listData = [];
+  let i;
+  const listData = [];
   $(dataElement+" span").each(function() {
     listData.push(Number($(this).html()));
   });
-  var listTotal = 0;
-  for(var i=0; i<listData.length; i++) {
+  let listTotal = 0;
+  for(i = 0; i<listData.length; i++) {
     listTotal += listData[i];
   }
-  var offset = 0;
-  var color = [
+  let offset = 0;
+  const color = [
     "cornflowerblue",
     "olivedrab",
     "orange",
@@ -45,8 +46,8 @@ function createPie(dataElement, pieElement) {
     "navy",
     "gray"
   ];
-  for(var i=0; i<listData.length; i++) {
-    var size = sliceSize(listData[i], listTotal);
+  for(i = 0; i<listData.length; i++) {
+    const size = sliceSize(listData[i], listTotal);
     iterateSlices(size, pieElement, offset, i, 0, color[i]);
     $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", color[i]);
     offset += size;
