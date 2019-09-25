@@ -45,6 +45,7 @@ function setTable(top5, probability) {
     }
     //create the pie 
     createPie(".pieID.legend", ".pieID.pie");
+
 }
 
 /*
