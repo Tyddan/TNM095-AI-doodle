@@ -3,7 +3,7 @@ function sliceSize(dataNum, dataTotal) {
 }
 function addSlice(sliceSize, pieElement, offset, sliceID, color) {
   $(pieElement).append("<div class='slice "+sliceID+"'><span></span></div>");
-  var offset = offset - 1;
+  offset = offset - 1;
   var sizeRotation = -179 + sliceSize;
   $("."+sliceID).css({
     "transform": "rotate("+offset+"deg) translate3d(0,0,0)"
@@ -29,7 +29,7 @@ function createPie(dataElement, pieElement) {
     listData.push(Number($(this).html()));
   });
   var listTotal = 0;
-  for(var i=0; i<listData.length; i++) {
+  for(i=0; i<listData.length; i++) {
     listTotal += listData[i];
   }
   var offset = 0;
@@ -45,7 +45,7 @@ function createPie(dataElement, pieElement) {
     "navy", 
     "gray"
   ];
-  for(var i=0; i<listData.length; i++) {
+  for(i=0; i<listData.length; i++) {
     var size = sliceSize(listData[i], listTotal);
     iterateSlices(size, pieElement, offset, i, 0, color[i]);
     $(dataElement+" li:nth-child("+(i+1)+")").css("border-color", color[i]);
