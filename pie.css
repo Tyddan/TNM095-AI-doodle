@@ -1,49 +1,10 @@
-@keyframes bake-pie {
-  from {
-    transform: rotate(0deg) translate3d(0,0,0);
-  }
-}
+
 
 .pieID {
   display: inline-block;
   vertical-align: top;
 }
-.pie {
-  height: 200px;
-  width: 200px;
-  position: relative;
-  margin: 0 30px 30px 0;
-}
-.pie::before {
-  content: "";
-  display: block;
-  position: absolute;
-  background: #FFFFFF;
-  z-index: 1;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  top: 50px;
-  left: 50px;
-}
-.pie::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 2px;
-  background: rgba(0,0,0,0.1);
-  border-radius: 50%;
-  box-shadow: 0 0 3px 4px rgba(0,0,0,0.1);
-  margin: 220px auto;
-  
-}
-.slice {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  clip: rect(0px, 200px, 200px, 100px);
-  animation: bake-pie 1s;
-}
+
 .slice span {
   display: block;
   position: absolute;
@@ -65,6 +26,7 @@
               2px 2px 0 #BBB;
 }
 .legend li {
+  list-style-type: none;
   width: 150px;
   height: 1.25em;
   margin-bottom: 0.7em;
