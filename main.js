@@ -42,8 +42,6 @@ function setTable(topGuess, probability) {
         sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
     }
-    //create the pie 
-    createPie(".pieID.legend", ".pieID.pie");
 
 }
 
@@ -233,10 +231,10 @@ function allowDrawing() {
     document.getElementById('status').innerHTML = 'Model Loaded';
 
     $('button').prop('disabled', false);
-    var slider = document.getElementById('myRange');
+    /*var slider = document.getElementById('myRange');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
-    };
+    };*/
 }
 
 /*

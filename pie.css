@@ -10,7 +10,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: black;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -21,21 +20,19 @@
   margin: 0;
   background: #FFF;
   padding: 15px;
-  font-size: 13px;
-  box-shadow: 1px 1px 0 #DDD,
-              2px 2px 0 #BBB;
+  font-size: 15px;
 }
 .legend li {
   list-style-type: none;
-  width: 150px;
+  width: 200px;
   height: 1.25em;
   margin-bottom: 0.7em;
   padding-left: 0.5em;
-  border-left: 1.25em solid black;
 }
+
 .legend em {
   font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
 }
-.legend span {
-  float: right;
-}
+
