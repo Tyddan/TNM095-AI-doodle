@@ -7,10 +7,10 @@ var canvas;
 var coords = [];
 var mousePressed = false;
 var mode;
+var content;
+var random;
+var randomClass;
 
-$.getScript("random.js", function() {
-    alert("Script loaded but not necessarily executed.");
-});
 
 /*
 prepare the drawing canvas 
@@ -46,11 +46,18 @@ function setTable(topGuess, probability) {
         sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
 
-        if(topGuess === randomName)
+        if(sym.innerHTML === randomClass)
         {
-
+            RndText();
         }
     }
+}
+
+function RndText() {
+    content = document.getElementById("ShowText");
+    random = parseInt(Math.random() * classNames.length);
+    randomClass = classNames[random];
+    content.innerHTML= randomClass;
 }
 
 /*
@@ -105,7 +112,7 @@ function getImageData() {
         const dpi = window.devicePixelRatio;
         return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
             (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
-    }
+}
 
 /*
 get the prediction 

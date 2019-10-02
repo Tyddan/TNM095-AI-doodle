@@ -28,9 +28,6 @@
 <!-- main script -->
 <script src = "main.js" > </script>
 
-<!-- random script -->
-<script src = "random.js" ></script>
-
 <!-- main css -->
 <link rel = "stylesheet" href="main.css" > 
 	
@@ -49,7 +46,8 @@
 </div>
 
 <h1>Draw this: </h1>
-<div id="ShowText"></div>
+
+<div id="ShowText" ></div>
 
 <div class="row">
   <div class="col" style ='margin-left:100px;'>
@@ -73,9 +71,15 @@
 </div>
 
 </body>
-<script src="pie.js"></script>
 <script>
 	console.log('starting');
 	start();
+
+    var content = document.getElementById("ShowText");
+    content.style.display="none";
+    onload = setTimeout(function(){
+      content.style.display="block";
+      RndText();
+    }, 2000);
 </script>
 </html>
