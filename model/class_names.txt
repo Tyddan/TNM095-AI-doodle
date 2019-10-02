@@ -7,7 +7,7 @@ ladder
 eyeglasses
 grapes
 book
-bottlecap
+ambulance
 traffic_light
 wristwatch
 wheel
@@ -76,7 +76,7 @@ screwdriver
 helmet
 bridge
 light_bulb
-birthday_cake
+ceiling_fan
 key
 donut
 bird
@@ -85,7 +85,7 @@ beard
 coffee_cup
 butterfly
 bench
-diamond
+rifle
 cat
 sock
 ice_cream
