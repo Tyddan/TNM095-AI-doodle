@@ -8,6 +8,10 @@ var coords = [];
 var mousePressed = false;
 var mode;
 
+$.getScript("random.js", function() {
+    alert("Script loaded but not necessarily executed.");
+});
+
 /*
 prepare the drawing canvas 
 */
@@ -41,8 +45,12 @@ function setTable(topGuess, probability) {
         let prob = document.getElementById('prob' + (i + 1));
         sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
-    }
 
+        if(topGuess === randomName)
+        {
+
+        }
+    }
 }
 
 /*
@@ -208,7 +216,6 @@ load the model
 */
 async function start() {
     
-    
     //load the model 
     model = await tf.loadLayersModel('model/model.json');
     
@@ -219,7 +226,7 @@ async function start() {
     allowDrawing();
     
     //load the class names
-    await loadDict()
+    await loadDict();
 }
 
 /*

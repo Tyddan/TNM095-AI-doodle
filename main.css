@@ -31,4 +31,6 @@
     cursor: pointer;
 }
 
-
+#random {
+    font: italic 14pt Arial;
+}
