@@ -1,75 +1,69 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>DOODLEClassifier</title>
-
+<title>DOODLle</title>
 <!-- bs4 css -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
-	
 <!-- css pie -->
 <link rel="stylesheet" href="pie.css">
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script data-require="jquery" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
 <!-- TensorFlow.js script -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
-	
 <!-- canvas script -->
 <script src="fabric.js"></script>
-	
 <!-- main script -->
 <script src = "main.js" > </script>
-
 <!-- main css -->
-<link rel = "stylesheet" href="main.css" > 
-	
+<link rel = "stylesheet" href="main.css" >
 </head>
+
 <body>
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-  <!-- Brand/logo -->
-  <a class="navbar-brand" href="#"><h1>DOOD<small>LE</small></h1></a>
-  </nav>
-<div class="container-fluid"> 
-
-<blockquote class="blockquote text-justify" style="margin:30px;">
- <p> A doodle classifier for the project course TNM095 - AI for interactive media </p>
-    <footer class="blockquote-footer">Amanda Tydén & Aniisa Bihi</footer>
-  </blockquote>
-</div>
-
-<h1>Draw this: </h1>
-
-<div id="ShowText" ></div>
-
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #b3fce3; border-bottom: 2px solid black">
+        <div class="col">
+            <!-- Brand/logo -->
+            <a class="navbar-brand" href="#" style="float:left;"><h1>DOOD<small>LE</small></h1></a>
+        </div>
+            <blockquote class="blockquote" style="margin:20px;">
+                <p> AI doodle classifier for the project course TNM095 - AI for interactive media </p>
+                <footer class="blockquote-footer">Amanda Tydén & Aniisa Bihi</footer>
+            </blockquote>
+</nav>
+<h6 id ='status' >Loading Model... </h6>
 <div class="row">
-  <div class="col" style ='margin-left:100px;'>
-<h4 id ='status' >Loading Model... </h4>	  
-<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
-<div class="btn-group" style = 'margin-top:40px; '>
-<!--<input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;'>-->
-<button type="button" class="btn btn-outline-primary" onclick ='erase()' style ='margin-left:10px;' disabled>Clear</button>
-    </div>   
+    <div class="col1">
+        <div class="row">
+            <div class="col">
+                <h3>Draw this: </h3>
+            </div>
+            <div class="innerCol2">
+                <h3 id="ShowText"></h3>
+            </div>
+        </div>
+        <canvas id="canvas" width="700" height="420" class="canvas"></canvas>
+        <div class="btn-group">
+            <!--<input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;'>-->
+            <button type="button" class="btn" onclick ='erase()' style ='margin-left:10px;' disabled>Clear Canvas</button>
+            <button type="button" class="btn" onclick ='RndText();' style ='margin-left:10px;' disabled>New Word</button>
+        </div>
+    </div>
+    <div class="col2">
+        <section class="section" style="margin-top:120px">
+            <ul class="pieID legend" id="bubble">
+                <li>
+                    <p id="guess">Is it <em id="sym1"></em> ?</p>
+                    <p id="prob">Probability: <em id="prob1"></em> %</p>
+                </li>
+            </ul>
+        </section>
+    </div>
 </div>
-  <div class="col">
-    <section style="margin-top:120px">
-    <ul class="pieID legend">
-      <li>
-        <em id = "sym1"></em>
-        <span id = "prob1" ></span>
-      </li>
-    </ul>
-  </section>
-</div>
-</div>
-
+<div id="snackbar">AI guessed CORRECT!</div>
 </body>
 <script>
 	console.log('starting');

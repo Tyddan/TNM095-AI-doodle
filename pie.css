@@ -11,14 +11,13 @@
 }
 .legend li {
   list-style-type: none;
-  width: 150px;
+  width: 200px;
   height: 1.25em;
   margin-bottom: 0.7em;
   padding-left: 0.5em;
 }
 .legend em {
   font-style: normal;
-}
-.legend span {
-  float: right;
+  font-weight: bold;
+  font-size: 20px;
 }

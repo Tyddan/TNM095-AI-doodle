@@ -47,15 +47,12 @@ function setTable(topGuess, probability) {
 
         if(sym.innerHTML === randomClass)
         {
-            setTimeout(function(){
-                sym.innerHTML = 'I GUESSED RIGHT';
-                prob.innerHTML = '';
-            }, 1000);
-
+            snackbar();
             setTimeout(function(){
                 erase();
                 RndText();
                 sym.innerHTML = '';
+                prob.innerHTML = '';
             }, 3000);
         }
     }
@@ -69,6 +66,15 @@ function RndText() {
     random = parseInt(Math.random() * classNames.length);
     randomClass = classNames[random];
     content.innerHTML= randomClass;
+}
+
+/*
+snackbar when AI guesses correct drawing
+*/
+function snackbar() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
 /*
