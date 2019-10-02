@@ -30,3 +30,7 @@
     background: #007AFF;
     cursor: pointer;
 }
+
+#random {
+    font: italic 14pt Arial;
+}

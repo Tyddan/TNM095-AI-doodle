@@ -8,6 +8,9 @@ var coords = [];
 var mousePressed = false;
 var mode;
 
+$.getScript("random.js", function() {
+    alert("Script loaded but not necessarily executed.");
+});
 /*
 prepare the drawing canvas 
 */
@@ -34,17 +37,22 @@ $(function() {
 /*
 set the table of the predictions 
 */
-function setTable(top5, probability) {
+function setTable(topGuess, probability) {
     //loop over the predictions 
-    for (var i = 0; i < top5.length; i++) {
+    for (var i = 0; i < topGuess.length; i++) {
         let sym = document.getElementById('sym' + (i + 1));
         let prob = document.getElementById('prob' + (i + 1));
-        sym.innerHTML = top5[i];
+        sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
     }
     //create the pie 
     createPie(".pieID.legend", ".pieID.pie");
 
+    if(topGuess === randomName)
+    {
+        // show the corresponding line
+        $('#random').text(lines[randomName]);
+    }
 }
 
 /*
@@ -115,8 +123,8 @@ function getFrame() {
         const pred = model.predict(preprocess(imgData)).dataSync();
 
         //find the top 5 predictions 
-        const indices = findIndicesOfMax(pred, 5);
-        const probability = findTopValues(pred, 5);
+        const indices = findIndicesOfMax(pred, 1);
+        const probability = findTopValues(pred, 1);
         const names = getClassNames(indices);
 
         //set the table 
@@ -152,6 +160,30 @@ function success(data) {
     const lst = data.split(/\n/);
     for (var i = 0; i < lst.length - 1; i++) {
         classNames[i] = lst[i]
+    }
+}
+
+function randomClassName(){
+    var randomName;
+    var lastRandomName;
+
+    loadDict();
+
+    // only set up the click handler if there were lines found
+    if (classNames && classNames.length) {
+        $('#showLine').on('click', function () {
+            // loop to prevent repeating the last random name
+            while (randomName === lastRandomName) {
+                randomName = parseInt(Math.random() * classNames.length);
+                // check to prevent infinite loop
+                if (classNames.length === 1) { break; }
+            }
+            // keep track of the last random name
+            lastRandomName = randomName;
+
+            // show the corresponding line
+            $('#random').text(classNames[randomName]);
+        });
     }
 }
 
@@ -209,7 +241,9 @@ function preprocess(imgData) {
 load the model
 */
 async function start() {
-    
+
+    /*var randomClass = parseInt(Math.random() * classNames.length);
+    var lastRandomClass = randomClass;*/
     
     //load the model 
     model = await tf.loadLayersModel('model/model.json');
@@ -221,7 +255,23 @@ async function start() {
     allowDrawing();
     
     //load the class names
-    await loadDict()
+    await loadDict();
+
+    /*// only set up the click handler if there were lines found
+    if ( classNames && classNames.length) {
+            // loop to prevent repeating the last random number
+            while (randomClass === lastRandomClass) {
+                randomClass = parseInt(Math.random() * classNames.length);
+                // check to prevent infinite loop
+                if (classNames.length === 1) { break; }
+
+                // keep track of the last random number
+                lastRandomClass = randomClass;
+            }
+
+            // show the corresponding line
+            $('#random').text(classNames[randomClass]);
+    }*/
 }
 
 /*

@@ -11,6 +11,7 @@
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script data-require="jquery" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -26,6 +27,9 @@
 	
 <!-- main script -->
 <script src = "main.js" > </script>
+
+<!-- random script -->
+<script src = "random.js" ></script>
 
 <!-- main css -->
 <link rel = "stylesheet" href="main.css" > 
@@ -82,11 +86,16 @@
     </ul>
   </section>
 </div>
-</div>  
+</div>
+
+<h1>Draw this: </h1>
+<button id="showLine">Draw me!</button>
+<p id="random"></p>
+
 </body>
 <script src="pie.js"></script>
 <script>
 	console.log('starting');
-	start()
+	start();
 </script>
 </html>
