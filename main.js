@@ -11,6 +11,7 @@ var mode;
 $.getScript("random.js", function() {
     alert("Script loaded but not necessarily executed.");
 });
+
 /*
 prepare the drawing canvas 
 */
@@ -44,14 +45,11 @@ function setTable(topGuess, probability) {
         let prob = document.getElementById('prob' + (i + 1));
         sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
-    }
-    //create the pie 
-    createPie(".pieID.legend", ".pieID.pie");
 
-    if(topGuess === randomName)
-    {
-        // show the corresponding line
-        $('#random').text(lines[randomName]);
+        if(topGuess === randomName)
+        {
+
+        }
     }
 }
 
@@ -163,30 +161,6 @@ function success(data) {
     }
 }
 
-function randomClassName(){
-    var randomName;
-    var lastRandomName;
-
-    loadDict();
-
-    // only set up the click handler if there were lines found
-    if (classNames && classNames.length) {
-        $('#showLine').on('click', function () {
-            // loop to prevent repeating the last random name
-            while (randomName === lastRandomName) {
-                randomName = parseInt(Math.random() * classNames.length);
-                // check to prevent infinite loop
-                if (classNames.length === 1) { break; }
-            }
-            // keep track of the last random name
-            lastRandomName = randomName;
-
-            // show the corresponding line
-            $('#random').text(classNames[randomName]);
-        });
-    }
-}
-
 /*
 get indices of the top probabilities
 */
@@ -241,9 +215,6 @@ function preprocess(imgData) {
 load the model
 */
 async function start() {
-
-    /*var randomClass = parseInt(Math.random() * classNames.length);
-    var lastRandomClass = randomClass;*/
     
     //load the model 
     model = await tf.loadLayersModel('model/model.json');
@@ -256,22 +227,6 @@ async function start() {
     
     //load the class names
     await loadDict();
-
-    /*// only set up the click handler if there were lines found
-    if ( classNames && classNames.length) {
-            // loop to prevent repeating the last random number
-            while (randomClass === lastRandomClass) {
-                randomClass = parseInt(Math.random() * classNames.length);
-                // check to prevent infinite loop
-                if (classNames.length === 1) { break; }
-
-                // keep track of the last random number
-                lastRandomClass = randomClass;
-            }
-
-            // show the corresponding line
-            $('#random').text(classNames[randomClass]);
-    }*/
 }
 
 /*
