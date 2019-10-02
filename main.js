@@ -46,9 +46,9 @@ function setTable(topGuess, probability) {
         sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
 
-        if(topGuess === randomName)
+        if(sym === classNames)
         {
-
+            RndText();
         }
     }
 }

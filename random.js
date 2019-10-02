@@ -3,4 +3,4 @@ function RndText() {
     document.getElementById('ShowText').innerHTML=classNames[random];
 }
 onload = function() { RndText(); };
-setInterval(function() { RndText(); }, 2000);
+setInterval(function() { RndText(); }, 10000);
