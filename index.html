@@ -36,19 +36,23 @@
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <!-- Brand/logo -->
   <a class="navbar-brand" href="#"><h1>DOOD<small>LE</small></h1></a>
-    <blockquote class="blockquote text-justify" style="margin:30px;">
-        <p> A doodle classifier for the project course TNM095 - AI for interactive media </p>
-        <footer class="blockquote-footer">Amanda Tydén & Aniisa Bihi</footer>
-    </blockquote>
-    </div>
   </nav>
-<div class="container-fluid">
-<h4 id ='status' >Status: Loading Model... </h4>
-    
+<div class="container-fluid"> 
+
+<blockquote class="blockquote text-justify" style="margin:30px;">
+ <p> A doodle classifier for the project course TNM095 - AI for interactive media </p>
+    <footer class="blockquote-footer">Amanda Tydén & Aniisa Bihi</footer>
+  </blockquote>
+</div>
+
+<h1>Draw this: </h1>
+
+<div id="ShowText" ></div>
+
 <div class="row">
   <div class="col" style ='margin-left:100px;'>
-      <h3 id="ShowText">Draw this: </h3>
-      <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
+<h4 id ='status' >Loading Model... </h4>	  
+<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
 <div class="btn-group" style = 'margin-top:40px; '>
 <input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;'>
 <button type="button" class="btn btn-outline-primary" onclick ='erase()' style ='margin-left:10px;' disabled>Clear</button>
@@ -58,14 +62,14 @@
     <section style="margin-top:120px">
     <ul class="pieID legend">
       <li>
-          <p>Is it a <em id = "sym1"></em> ?</p>
-          <p>Probability: <span id = "prob1" ></span> %</p>
+        <em id = "sym1"></em>
+        <span id = "prob1" ></span>
       </li>
     </ul>
   </section>
 </div>
 </div>
-</div>
+
 </body>
 <script>
 	console.log('starting');
