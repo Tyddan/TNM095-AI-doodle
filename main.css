@@ -1,4 +1,4 @@
-.slider {
+/*.slider {
     -webkit-appearance: none;
     width: 230px;
     height: 1px;
@@ -29,8 +29,4 @@
     border-radius: 50%;
     background: #007AFF;
     cursor: pointer;
-}
-
-#random {
-    font: italic 14pt Arial;
-}
+}*/

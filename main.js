@@ -11,7 +11,6 @@ var content;
 var random;
 var randomClass;
 
-
 /*
 prepare the drawing canvas 
 */
@@ -48,11 +47,23 @@ function setTable(topGuess, probability) {
 
         if(sym.innerHTML === randomClass)
         {
-            RndText();
+            setTimeout(function(){
+                sym.innerHTML = 'I GUESSED RIGHT';
+                prob.innerHTML = '';
+            }, 1000);
+
+            setTimeout(function(){
+                erase();
+                RndText();
+                sym.innerHTML = '';
+            }, 3000);
         }
     }
 }
 
+/*
+random class chosen for user to draw
+*/
 function RndText() {
     content = document.getElementById("ShowText");
     random = parseInt(Math.random() * classNames.length);
@@ -105,13 +116,13 @@ function getMinBox() {
 get the current image data 
 */
 function getImageData() {
-        //get the minimum bounding box around the drawing 
-        const mbb = getMinBox();
+    //get the minimum bounding box around the drawing
+    const mbb = getMinBox();
 
-        //get image data according to dpi 
-        const dpi = window.devicePixelRatio;
-        return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
-            (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
+    //get image data according to dpi
+    const dpi = window.devicePixelRatio;
+    return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
+        (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
 }
 
 /*
@@ -127,7 +138,7 @@ function getFrame() {
         //get the prediction 
         const pred = model.predict(preprocess(imgData)).dataSync();
 
-        //find the top 5 predictions 
+        //find the top prediction
         const indices = findIndicesOfMax(pred, 1);
         const probability = findTopValues(pred, 1);
         const names = getClassNames(indices);
@@ -151,7 +162,6 @@ function getClassNames(indices) {
 load the class names 
 */
 async function loadDict() {
-
     await $.ajax({
         url: 'model/class_names.txt',
         dataType: 'text',
@@ -169,7 +179,7 @@ function success(data) {
 }
 
 /*
-get indices of the top probabilities
+get indices of the top probability
 */
 function findIndicesOfMax(inp, count) {
     var output = [];
@@ -186,12 +196,12 @@ function findIndicesOfMax(inp, count) {
 }
 
 /*
-find the top 5 predictions
+find the top prediction
 */
 function findTopValues(inp, count) {
     var output = [];
     let indices = findIndicesOfMax(inp, count);
-    // show 5 greatest scores
+    // show greatest score
     for (var i = 0; i < indices.length; i++)
         output[i] = inp[indices[i]];
     return output
@@ -212,8 +222,7 @@ function preprocess(imgData) {
         const offset = tf.scalar(255.0);
         const normalized = tf.scalar(1.0).sub(resize.div(offset));
 
-        //We add a dimension to get a batch shape 
-
+        //We add a dimension to get a batch shape
         return normalized.expandDims(0)
     })
 }
@@ -222,7 +231,6 @@ function preprocess(imgData) {
 load the model
 */
 async function start() {
-    
     //load the model 
     model = await tf.loadLayersModel('model/model.json');
     
@@ -241,14 +249,13 @@ allow drawing on canvas
 */
 function allowDrawing() {
     canvas.isDrawingMode = 1;
-    
     document.getElementById('status').innerHTML = 'Model Loaded';
 
     $('button').prop('disabled', false);
-    var slider = document.getElementById('myRange');
+    /*var slider = document.getElementById('myRange');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
-    };
+    };*/
 }
 
 /*
