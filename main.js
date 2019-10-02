@@ -11,7 +11,6 @@ var content;
 var random;
 var randomClass;
 
-
 /*
 prepare the drawing canvas 
 */
@@ -41,18 +40,22 @@ set the table of the predictions
 function setTable(topGuess, probability) {
     //loop over the predictions 
     for (var i = 0; i < topGuess.length; i++) {
-        let sym = document.getElementById('sym' + (i + 1));
-        let prob = document.getElementById('prob' + (i + 1));
+        let sym = document.getElementById('sym' + (i));
+        let prob = document.getElementById('prob' + (i));
         sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
 
         if(sym.innerHTML === randomClass)
         {
             RndText();
+            erase();
         }
     }
 }
 
+/*
+random class for user to draw
+*/
 function RndText() {
     content = document.getElementById("ShowText");
     random = parseInt(Math.random() * classNames.length);
@@ -105,13 +108,13 @@ function getMinBox() {
 get the current image data 
 */
 function getImageData() {
-        //get the minimum bounding box around the drawing 
-        const mbb = getMinBox();
+    //get the minimum bounding box around the drawing
+    const mbb = getMinBox();
 
-        //get image data according to dpi 
-        const dpi = window.devicePixelRatio;
-        return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
-            (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
+    //get image data according to dpi
+    const dpi = window.devicePixelRatio;
+    return canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
+        (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
 }
 
 /*
@@ -127,7 +130,7 @@ function getFrame() {
         //get the prediction 
         const pred = model.predict(preprocess(imgData)).dataSync();
 
-        //find the top 5 predictions 
+        //find the top prediction
         const indices = findIndicesOfMax(pred, 1);
         const probability = findTopValues(pred, 1);
         const names = getClassNames(indices);
@@ -186,12 +189,12 @@ function findIndicesOfMax(inp, count) {
 }
 
 /*
-find the top 5 predictions
+find the top prediction
 */
 function findTopValues(inp, count) {
     var output = [];
     let indices = findIndicesOfMax(inp, count);
-    // show 5 greatest scores
+    // show greatest score
     for (var i = 0; i < indices.length; i++)
         output[i] = inp[indices[i]];
     return output
@@ -212,8 +215,7 @@ function preprocess(imgData) {
         const offset = tf.scalar(255.0);
         const normalized = tf.scalar(1.0).sub(resize.div(offset));
 
-        //We add a dimension to get a batch shape 
-
+        //We add a dimension to get a batch shape
         return normalized.expandDims(0)
     })
 }
@@ -242,13 +244,13 @@ allow drawing on canvas
 function allowDrawing() {
     canvas.isDrawingMode = 1;
     
-    document.getElementById('status').innerHTML = 'Model Loaded';
+    document.getElementById('status').innerHTML = 'Status: Model Loaded';
 
     $('button').prop('disabled', false);
-    var slider = document.getElementById('myRange');
+   /* var slider = document.getElementById('myRange');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
-    };
+    };*/
 }
 
 /*
