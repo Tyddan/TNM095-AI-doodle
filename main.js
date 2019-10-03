@@ -44,7 +44,8 @@ function setTable(topGuess, probability) {
         let prob = document.getElementById('prob' + (i + 1));
         sym.innerHTML = topGuess[i];
         prob.innerHTML = Math.round(probability[i] * 100);
-
+        console.log(sym.innerHTML);
+        console.log(randomClass);
         if(sym.innerHTML === randomClass)
         {
             snackbar();
