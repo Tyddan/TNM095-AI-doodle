@@ -18,7 +18,7 @@ p {
     top: 25%;
 }
 .innerCol2 {
-    margin-left: -570px;
+    margin-left: -470px;
 }
 .col2 {
     position: absolute;
@@ -31,7 +31,7 @@ p {
 }
 .btn-group {
     margin-top: 15px;
-    margin-left: 90px;
+    margin-left: 20px;
 }
 .btn {
     font-weight: bold;
