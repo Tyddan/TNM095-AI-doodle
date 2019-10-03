@@ -35,6 +35,10 @@
             </blockquote>
 </nav>
 <h6 id ='status' >Loading Model... </h6>
+<div class="buttons">
+    <button type="button" class="button" onclick ='erase()' disabled>Clear Canvas</button>
+    <button type="button" class="button" onclick ='RndText();' disabled>New Word</button>
+</div>
 <div class="row">
     <div class="col1">
         <div class="row">
@@ -46,11 +50,6 @@
             </div>
         </div>
         <canvas id="canvas" width="570" height="570" class="canvas"></canvas>
-        <div class="btn-group">
-            <!--<input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;'>-->
-            <button type="button" class="btn" onclick ='erase()' style ='margin-left:10px;' disabled>Clear Canvas</button>
-            <button type="button" class="btn" onclick ='RndText();' style ='margin-left:10px;' disabled>New Word</button>
-        </div>
     </div>
     <div class="col2">
         <section class="section" style="margin-top:120px">
