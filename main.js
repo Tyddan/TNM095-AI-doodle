@@ -66,7 +66,7 @@ random class chosen for user to draw
 function RndText() {
     content = document.getElementById("ShowText");
     random = parseInt(Math.random() * classNames.length);
-    randomClass = classNames[random].replace(/_/g," ");
+    randomClass = classNames[random];
     content.innerHTML= randomClass;
 }
 
