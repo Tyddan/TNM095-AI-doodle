@@ -42,10 +42,9 @@ function setTable(topGuess, probability) {
     for (var i = 0; i < topGuess.length; i++) {
         let sym = document.getElementById('sym' + (i + 1));
         let prob = document.getElementById('prob' + (i + 1));
-        sym.innerHTML = topGuess[i];
+        sym.innerHTML = topGuess[i].replace(/_/g,' ');
         prob.innerHTML = Math.round(probability[i] * 100);
-        console.log(sym.innerHTML);
-        console.log(randomClass);
+       
         if(sym.innerHTML === randomClass)
         {
             snackbar();
@@ -66,7 +65,7 @@ random class chosen for user to draw
 function RndText() {
     content = document.getElementById("ShowText");
     random = parseInt(Math.random() * classNames.length);
-    randomClass = classNames[random];
+    randomClass = classNames[random].replace(/_/g,' ');
     content.innerHTML= randomClass;
 }
 
