@@ -43,7 +43,7 @@ function setTable(topGuess, probability) {
     let sym = document.getElementById('sym1');
     let prob = document.getElementById('prob1');
     sym.innerHTML = topGuess[0].replace(/_/g," ");
-    prob.innerHTML = Math.round(probability[i] * 100);
+    prob.innerHTML = Math.round(probability[0] * 100);
 
     if(sym.innerHTML === randomClass)
     {
