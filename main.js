@@ -39,23 +39,23 @@ set the table of the predictions
 */
 function setTable(topGuess, probability) {
     //loop over the predictions 
-    for (var i = 0; i < topGuess.length; i++) {
-        let sym = document.getElementById('sym' + (i + 1));
-        let prob = document.getElementById('prob' + (i + 1));
-        sym.innerHTML = topGuess[i];
-        prob.innerHTML = Math.round(probability[i] * 100);
+    
+    let sym = document.getElementById('sym1');
+    let prob = document.getElementById('prob1');
+    sym.innerHTML = topGuess[0].replace(/_/g," ");
+    prob.innerHTML = Math.round(probability[i] * 100);
 
-        if(sym.innerHTML === randomClass)
-        {
-            snackbar();
-            setTimeout(function(){
-                erase();
-                RndText();
-                sym.innerHTML = '';
-                prob.innerHTML = '';
-            }, 3000);
-        }
+    if(sym.innerHTML === randomClass)
+    {
+        snackbar();
+        setTimeout(function(){
+            erase();
+            RndText();
+            sym.innerHTML = '';
+            prob.innerHTML = '';
+        }, 3000);
     }
+   
 }
 
 /*
@@ -64,7 +64,7 @@ random class chosen for user to draw
 function RndText() {
     content = document.getElementById("ShowText");
     random = parseInt(Math.random() * classNames.length);
-    randomClass = classNames[random];
+    randomClass = classNames[random].replace(/_/g," ");
     content.innerHTML= randomClass;
 }
 
