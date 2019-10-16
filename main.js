@@ -19,7 +19,7 @@ $(function() {
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 0;
     canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width = 10;
+    canvas.freeDrawingBrush.width = 15;
     canvas.renderAll();
     //setup listeners 
     canvas.on('mouse:up', function() {
